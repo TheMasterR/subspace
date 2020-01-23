@@ -8,11 +8,11 @@
         <link rel="icon" href="/static/favicon.png?v={{$.Version}}">
         <link rel="apple-touch-icon" href="/static/favicon.png?v={{$.Version}}">
 
-        <title>Subspace</title>
+        <title>Wireguard</title>
 
         <link rel="stylesheet" type="text/css" href="/static/semantic/semantic.min.css?v={{$.Version}}">
         <link rel="stylesheet" type="text/css" href="/static/style.css?v={{$.Version}}">
-        <link rel="stylesheet" type="text/css" href="/static/roboto.css?v={{$.Version}}">
+        <link rel="stylesheet" type="text/css" href="/static/Neo-Sans-Std.css?v={{$.Version}}">
 
         <script src="/static/jquery.min.js?v={{$.Version}}"></script>
         <script src="/static/semantic/semantic.min.js?v={{$.Version}}"></script>
@@ -28,7 +28,7 @@
                         <a class="item" href="{{.Backlink}}"><i class="home icon"></i></a>
                     {{end}}
                 {{end}}
-                <a href="/" class="{{if eq $.Section "index"}}active{{end}} item">Subspace</a>
+                <a href="/" class="{{if eq $.Section "index"}}active{{end}} item">Networks</a>
                 {{if $.Admin}}
                     <a href="/settings" class="{{if eq $.Section "settings"}}active{{end}} item">Settings</a>
                 {{end}}

@@ -1,0 +1,6 @@
+@font-face {
+    font-family: 'Neo Sans Std';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Neo Sans Std'), local('Neo Sans Std Light'), url(fonts/NeoSansStd-Regular.otf) format('opentype'), url(fonts/NeoSansStd-Light.otf) format('opentype');
+}

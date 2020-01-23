@@ -1,4 +1,4 @@
-FROM golang:1.11.5
+FROM golang:1.13.6
 MAINTAINER github.com/subspacecloud/subspace
 
 RUN apt-get update \
@@ -20,7 +20,8 @@ RUN go get -v \
 	gopkg.in/gomail.v2 \
     github.com/crewjam/saml \
     github.com/dgrijalva/jwt-go \
-    github.com/skip2/go-qrcode
+    github.com/skip2/go-qrcode \
+    github.com/crewjam/httperr
 
 COPY *.go ./
 COPY static ./static

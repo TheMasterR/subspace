@@ -70,3 +70,6 @@ body {
 p {
     font-size: 1.33em !important;
 }
+.ip {
+    color: darkgreen;
+}

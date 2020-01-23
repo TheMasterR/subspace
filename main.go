@@ -86,7 +86,7 @@ var (
 )
 
 func init() {
-	cli.StringVar(&datadir, "datadir", "/data", "data dir")
+	cli.StringVar(&datadir, "datadir", "./data", "data dir")
 	cli.StringVar(&backlink, "backlink", "", "backlink (optional)")
 	cli.StringVar(&httpHost, "http-host", "", "HTTP host")
 	cli.StringVar(&httpAddr, "http-addr", ":80", "HTTP listen address")

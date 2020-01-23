@@ -1,0 +1,52 @@
+version: "3.3"
+services:
+  subspace:
+    image: strategiczone/subspace:latest
+    container_name: ${SERVICE}
+    restart: always
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - /usr/bin/wg:/usr/bin/wg
+      - ./data:/data
+    environment:
+      TZ: ${TZ}
+      SMTP_FROM: ${SMTP_FROM}
+      SMTP_SERVER: ${SMTP_SERVER}
+      SMTP_USERNAME: ${SMTP_USERNAME}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      # Smtp port not work, need fix
+      # SMTP_PORT: ${SMTP_PORT}
+      SUBSPACE_HTTP_HOST: ${DOMAIN_NAME}
+      SUBSPACE_LETSENCRYPT: "false"
+      SUBSPACE_HTTP_INSECURE: "true"
+      SUBSPACE_HTTP_ADDR: :${SERVICE_PORT}
+      SUBSPACE_NAMESERVER: ${SUBSPACE_NAMESERVER}
+      SUBSPACE_LISTENPORT: ${WG_PORT}
+      SUBSPACE_IPV4_POOL: ${SUBSPACE_IPV4_POOL}
+      SUBSPACE_IPV6_POOL: ${SUBSPACE_IPV6_POOL}
+      SUBSPACE_IPV6_NAT_ENABLED: 1
+      #SUBSPACE_ROUTE: ${SUBSPACE_ROUTE}
+    ports:
+      - target: ${WG_PORT}
+        published: ${WG_PORT}
+        protocol: udp
+        mode: host
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE}.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.services.${SERVICE}.loadbalancer.server.port=${SERVICE_PORT}"
+      - "traefik.http.routers.${SERVICE}.tls.certresolver=le"
+      - "traefik.http.routers.${SERVICE}.entrypoints=web-secure"
+      - "traefik.http.middlewares.${SERVICE}_https.redirectscheme.scheme=https"
+      - "traefik.http.routers.${SERVICE}_redirect.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.${SERVICE}_redirect.entrypoints=web"
+      - "traefik.http.routers.${SERVICE}_redirect.middlewares=${SERVICE}_https"
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
